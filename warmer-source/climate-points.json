@@ -1,0 +1,47 @@
+{
+  "climate.warmer": {
+    "class": "com.hkmc.telematics.service.apps.climate.ClimateManager"
+  },
+  "climate.warmer.open": {
+    "method": "mD",
+    "params": [],
+    "ret": "void",
+    "static": false
+  },
+  "climate.listener": {
+    "class": "com.hkmc.telematics.service.apps.climate.j"
+  },
+  "climate.listener.front": {
+    "method": "onFrontSeatHeatStatusReceived",
+    "params": [
+      "int",
+      "int",
+      "int",
+      "int"
+    ],
+    "ret": "void",
+    "static": false
+  },
+  "climate.listener.wheel": {
+    "method": "onSWRCStatusReceived",
+    "params": [
+      "int",
+      "int",
+      "int",
+      "int"
+    ],
+    "ret": "void",
+    "static": false
+  },
+  "climate.listener.rear": {
+    "method": "onRearSeatHeatStatusReceived",
+    "params": [
+      "int",
+      "int",
+      "int",
+      "int"
+    ],
+    "ret": "void",
+    "static": false
+  }
+}

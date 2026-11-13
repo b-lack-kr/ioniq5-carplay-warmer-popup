@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "settings": [
+    {
+      "key": "experimentalOverlay",
+      "type": "toggle",
+      "default": false,
+      "title": "CarPlay WARMER 화면 위 표시 (실험)",
+      "apply": "restart"
+    }
+  ]
+}
