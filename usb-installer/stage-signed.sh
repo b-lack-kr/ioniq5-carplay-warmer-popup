@@ -23,19 +23,19 @@ stage_signed_payload() {
   warmer)
    [ -f "$source/mod.json" ] && [ ! -L "$source/mod.json" ] || return 1
    cp "$source/mod.json" "$dst/mod.json" || return 1
-   sum=$(md5 "$dst/mod.json") || return 1; [ "${sum%% *}" = 0dc916640fc9878f7eb51f28163cfbc6 ] || return 1
+   sum=$(md5 "$dst/mod.json") || return 1; [ "${sum%% *}" = b3e40c2f274a178a7447b8b6ab9572bb ] || return 1
    [ -f "$source/settings.json" ] && [ ! -L "$source/settings.json" ] || return 1
    cp "$source/settings.json" "$dst/settings.json" || return 1
-   sum=$(md5 "$dst/settings.json") || return 1; [ "${sum%% *}" = 56a8d91cd695daccd6f3186c443fb178 ] || return 1
+   sum=$(md5 "$dst/settings.json") || return 1; [ "${sum%% *}" = 8bc8a1cbbe0a4965aa44f24bf6580e15 ] || return 1
    [ -f "$source/hooks.jar" ] && [ ! -L "$source/hooks.jar" ] || return 1
    cp "$source/hooks.jar" "$dst/hooks.jar" || return 1
-   sum=$(md5 "$dst/hooks.jar") || return 1; [ "${sum%% *}" = 0c211b552f823f9e56826b6e9bf9b920 ] || return 1
+   sum=$(md5 "$dst/hooks.jar") || return 1; [ "${sum%% *}" = e86cae4629950a49cf8203fac52d1b8e ] || return 1
    [ -f "$source/META-HMGAPI/manifest.json" ] && [ ! -L "$source/META-HMGAPI/manifest.json" ] || return 1
    cp "$source/META-HMGAPI/manifest.json" "$dst/META-HMGAPI/manifest.json" || return 1
-   sum=$(md5 "$dst/META-HMGAPI/manifest.json") || return 1; [ "${sum%% *}" = 4eed1bdd4923b0119c76da7552f6d6ad ] || return 1
+   sum=$(md5 "$dst/META-HMGAPI/manifest.json") || return 1; [ "${sum%% *}" = dd6c51400b2981a9934bca3c54e51577 ] || return 1
    [ -f "$source/META-HMGAPI/signature" ] && [ ! -L "$source/META-HMGAPI/signature" ] || return 1
    cp "$source/META-HMGAPI/signature" "$dst/META-HMGAPI/signature" || return 1
-   sum=$(md5 "$dst/META-HMGAPI/signature") || return 1; [ "${sum%% *}" = dafac66116136e8f1fbdf96eca63a9e6 ] || return 1
+   sum=$(md5 "$dst/META-HMGAPI/signature") || return 1; [ "${sum%% *}" = 59586426102d3414bdbb7d28ad8af313 ] || return 1
    expected_author=fa2f9c74-a179-82d0-8c45-f2811df33fbf;;
   *) return 1;;
  esac

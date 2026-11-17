@@ -14,7 +14,7 @@ case "$(id)" in 'uid=0('*|'uid=0 '*|'uid=0') ;; *) finish ROOT_REQUIRED 1;; esac
 [ -x /system/xbin/nemesis ] && [ -x /system/bin/app_process.hmgapi-stock ] && [ -f /system/framework/hmgapi-hook.jar ] || finish NEMESIS_OR_HMGAPI_MISSING 1
 [ -f "$U/stage-signed.sh" ] && [ ! -L "$U/stage-signed.sh" ] || finish FILE_MISSING 1
 sum=$(md5 "$U/stage-signed.sh") || finish FILE_INVALID 1
-[ "${sum%% *}" = 4b44e645e88a6c3417779eca682ac588 ] || finish FILE_CHANGED 1
+[ "${sum%% *}" = 560756dd5def2c7a12044fe1446c8756 ] || finish FILE_CHANGED 1
 [ -f "$U/update-description.sh" ] && [ ! -L "$U/update-description.sh" ] || finish FILE_MISSING 1
 sum=$(md5 "$U/update-description.sh") || finish FILE_INVALID 1
 [ "${sum%% *}" = 34d4b9e490eb998eda4cc90ac1f6dd31 ] || finish FILE_CHANGED 1
@@ -31,7 +31,7 @@ done < "$OUT/package-list.txt"
 if [ "$count" = 1 ]; then
  case "$v" in ''|.*|*.|*..*|*[!0-9.]*) finish UNKNOWN_VERSION 1;; esac
  # Compare arbitrary numeric version components without coercing text.
- left=$v; right=0.0.16; relation=equal
+ left=$v; right=0.0.23; relation=equal
  while [ -n "$left" ] || [ -n "$right" ]; do
   a=${left%%.*}; b=${right%%.*}
   if [ "$a" = "$left" ]; then left=; else left=${left#*.}; fi
@@ -45,7 +45,7 @@ if [ "$count" = 1 ]; then
  done
  if [ "$relation" = newer ]; then finish KEPT_NEWER 0; fi
  if [ "$relation" = equal ]; then
-  /system/bin/sh "$U/update-description.sh" neev-warmer-mapless-research 0.0.16 || echo DESCRIPTION_NOT_UPDATED
+  /system/bin/sh "$U/update-description.sh" neev-warmer-mapless-research 0.0.23 || echo DESCRIPTION_NOT_UPDATED
   finish ALREADY_INSTALLED 0
  fi
 fi
@@ -54,8 +54,8 @@ fi
 /system/xbin/nemesis pkg-list > "$OUT/package-list-after.txt" 2>&1 || finish PACKAGE_LIST_FAILED 1
 found=0
 while IFS='|' read rid name enabled kind version description; do
- [ "$rid" != hmgapi.neev-warmer-mapless-research ] || [ "$version" != 0.0.16 ] || found=$((found+1))
+ [ "$rid" != hmgapi.neev-warmer-mapless-research ] || [ "$version" != 0.0.23 ] || found=$((found+1))
 done < "$OUT/package-list-after.txt"
 [ "$found" = 1 ] || finish REGISTRATION_NOT_FOUND 1
-/system/bin/sh "$U/update-description.sh" neev-warmer-mapless-research 0.0.16 || echo DESCRIPTION_NOT_UPDATED
+/system/bin/sh "$U/update-description.sh" neev-warmer-mapless-research 0.0.23 || echo DESCRIPTION_NOT_UPDATED
 finish INSTALLED_REBOOT_REQUIRED 0

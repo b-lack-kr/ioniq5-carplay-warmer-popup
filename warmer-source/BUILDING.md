@@ -1,6 +1,6 @@
 # 소스와 빌드 환경
 
-`src`와 `installer`는 배포된 0.0.16의 소스입니다. 루트의 Python 시험 실행기는 개발에 사용한 0.0.13 소스 트리에서 추가했으며, 릴리스 ZIP 안 `SOURCE.zip`의 소스와 대응합니다.
+`src`와 `installer`는 배포된 0.0.23의 소스입니다. 루트의 Python 시험 실행기는 개발에 사용한 0.0.13 소스 트리에서 추가했으며, 릴리스 ZIP 안 `SOURCE.zip`의 소스와 대응합니다.
 
 기존 `build.py` 및 시험 실행기는 작성자의 작업 공간에 있던 JDK, Android SDK, D8, HMG-API 클래스와 스텁 경로를 사용합니다. 이 저장소만 내려받아서 그대로 실행되는 빌드는 아직 준비되지 않았습니다. 별도의 Android SDK와 [HMG-API 소스](https://github.com/VysseCodes/HMG-API), 호환되는 빌드 환경이 필요하며 경로를 조정해야 합니다.
 

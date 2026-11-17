@@ -6,12 +6,12 @@ CarPlay 사용 중 WARMER 버튼을 누르면 CarPlay 화면 위에서 열선과
 
 ## 다운로드 및 설치
 
-1. [릴리스](https://github.com/b-lack-kr/ioniq5-carplay-warmer-popup/releases/tag/v0.0.16)의 Assets에서 `CarPlay-WARMER-Popup-0.0.16-USB.zip`을 받습니다.
+1. [릴리스](https://github.com/b-lack-kr/ioniq5-carplay-warmer-popup/releases/tag/v0.0.23)의 Assets에서 `CarPlay-WARMER-Popup-0.0.23-USB.zip`을 받습니다.
 2. 압축파일의 내용을 FAT32 또는 exFAT USB의 최상위에 압축 해제합니다.
 3. 차량에 USB를 연결하고 NEMESIS 확인 창에서 **Yes**를 누릅니다.
 4. 설치가 끝나면 HMG-API에서 **CarPlay WARMER 화면 위 표시**를 켜고 **Apply changes**를 누른 뒤 내비게이션을 재부팅합니다.
 
-올인원 패키지에 이미 포함되어 있다면 별도로 설치할 필요가 없습니다. 차량의 시트 옵션에 따라 표시되는 버튼이 달라질 수 있습니다. 0.0.16 단독 USB 설치본은 별도의 실차 설치 확인이 필요합니다.
+올인원 패키지에 이미 포함되어 있다면 별도로 설치할 필요가 없습니다. 차량의 시트 옵션에 따라 표시되는 버튼이 달라질 수 있습니다. 0.0.23은 차량에서 ADB로 설치해 팝업 화면을 확인했습니다. 단독 USB 설치본은 별도 실차 설치 확인이 필요합니다.
 
 삭제할 때는 HMG-API에서 관련 모드를 삭제하고 Apply changes를 적용한 뒤 NEMESIS의 My Packages에서 해당 패키지를 삭제합니다. NEMESIS와 HMG-API 자체는 유지하세요.
 

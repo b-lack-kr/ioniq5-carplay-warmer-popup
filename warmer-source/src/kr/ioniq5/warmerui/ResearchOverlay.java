@@ -2,6 +2,8 @@ package kr.ioniq5.warmerui;
 
 import android.content.Context;
 import android.graphics.PixelFormat;
+import android.graphics.Typeface;
+import android.graphics.Paint;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.SystemClock;
@@ -90,18 +92,26 @@ public final class ResearchOverlay {
         if (!(service instanceof WindowManager)) throw new IllegalStateException("window service");
         wm=(WindowManager)service;
         View content=LayoutInflater.from(context).inflate(hasRear?OEM_REAR_LAYOUT:OEM_LAYOUT, null);
+        View frontLabel=content.findViewById(0x7f060241);
+        Typeface stockFace=frontLabel instanceof TextView ? ((TextView)frontLabel).getTypeface() : null;
         // The stock dialog provides a title and full-width confirmation control
         // outside the OEM seat layout. Keep the OEM layout itself untouched.
         RelativeLayout chrome=new RelativeLayout(context);
         int cLeft=chrome.getPaddingLeft(), cTop=chrome.getPaddingTop(), cRight=chrome.getPaddingRight(), cBottom=chrome.getPaddingBottom();
         chrome.setBackgroundResource(OEM_POPUP_BG);
         chrome.setPadding(cLeft,cTop,cRight,cBottom);
-        int header=dp(context,48), footer=dp(context,48);
+        int header=dp(context,60), footer=dp(context,51);
         RelativeLayout.LayoutParams contentLp=new RelativeLayout.LayoutParams(-1,-1);
         contentLp.topMargin=header; contentLp.bottomMargin=footer;
         chrome.addView(content,contentLp);
         TextView title=new TextView(context);
-        title.setText("열선/통풍"); title.setTextSize(22); title.setGravity(Gravity.CENTER);
+        title.setTypeface(stockFace,Typeface.BOLD);
+        title.getPaint().setFakeBoldText(true);
+        // The vehicle's Korean fallback font does not visibly thicken enough
+        // with Typeface.BOLD alone; add a small stroke to match the OEM title.
+        title.getPaint().setStyle(Paint.Style.FILL_AND_STROKE);
+        title.getPaint().setStrokeWidth(context.getResources().getDisplayMetrics().density * 0.65f);
+        title.setText("열선/통풍"); title.setTextSize(26); title.setGravity(Gravity.CENTER);
         title.setTextColor(context.getResources().getColor(0x7f07001f));
         RelativeLayout.LayoutParams titleLp=new RelativeLayout.LayoutParams(-1,header);
         titleLp.addRule(RelativeLayout.ALIGN_PARENT_TOP); chrome.addView(title,titleLp);
@@ -168,10 +178,14 @@ public final class ResearchOverlay {
             }
         }});
         Button close=new Button(context); close.setText("확인");
+        close.setTypeface(stockFace,Typeface.BOLD);
+        close.getPaint().setFakeBoldText(true);
+        close.setTextSize(24);
         close.setTextColor(context.getResources().getColor(0x7f07001f));
         close.setBackgroundResource(0x7f0203da); // OEM day/night bottom-button selector
         RelativeLayout.LayoutParams closeLp=new RelativeLayout.LayoutParams(-1,footer);
         closeLp.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+        closeLp.leftMargin=dp(context,8);closeLp.rightMargin=dp(context,8);closeLp.bottomMargin=dp(context,8);
         chrome.addView(close,closeLp);close.setOnClickListener(new View.OnClickListener(){public void onClick(View v){
             AsyncListener l=asyncListener;if(l!=null)try{l.closedByUser();}catch(Throwable ignored){}dispose();
         }});
@@ -330,8 +344,9 @@ public final class ResearchOverlay {
             boolean useRear=initial.rear!=null&&initial.rear.length==4&&(initial.rear[0]>=1&&initial.rear[0]<=6||initial.rear[1]>=1&&initial.rear[1]<=6);
             panel=new ResearchOverlay(c,controller,useRear,initial);final ResearchOverlay p=panel;p.asyncListener=listener;
             WindowManager.LayoutParams lp=new WindowManager.LayoutParams(dp(c,p.hasRear?648:452),dp(c,414),WindowManager.LayoutParams.TYPE_SYSTEM_ALERT,
-                    WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE|WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL,PixelFormat.TRANSLUCENT);
-            lp.gravity=Gravity.CENTER;p.live=true;p.wm.addView(p.root,lp);p.update();if(!p.live)return null;
+                    WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE|WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL
+                    |WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN|WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,PixelFormat.TRANSLUCENT);
+            lp.gravity=Gravity.TOP|Gravity.CENTER_HORIZONTAL;lp.y=dp(c,33);p.live=true;p.wm.addView(p.root,lp);p.update();if(!p.live)return null;
             long now=SystemClock.elapsedRealtime();if(now<0||now>Long.MAX_VALUE-timeoutMs){p.dispose();return null;}
             p.attachDeadline=now+timeoutMs;
             p.attachPoll=new Runnable(){public void run(){
